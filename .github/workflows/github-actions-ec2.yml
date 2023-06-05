@@ -41,7 +41,7 @@ jobs:
    
       - name: Deploy to remote server
         run: |
-          sudo scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -r ${{ github.workspace }}/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/html/
+          scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -r ${{ github.workspace }}/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/html/
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_USER: ${{ secrets.SSH_USER }}
