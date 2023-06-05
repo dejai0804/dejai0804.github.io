@@ -33,11 +33,11 @@ jobs:
         run: |
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd /home/ec2-user/ && echo 'Running a command on the remote server' > file.txt"
      
-      - name: Clear known_hosts
-        run: ssh-keygen -R ${{ secrets.SSH_HOST }}
+#       - name: Clear known_hosts
+#         run: ssh-keygen -R ${{ secrets.SSH_HOST }}
      
-      - name: Update known_hosts
-        run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+#       - name: Update known_hosts
+#         run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
    
       - name: Deploy to remote server
         run: |
