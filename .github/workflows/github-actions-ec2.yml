@@ -41,7 +41,7 @@ jobs:
    
       - name: Deploy to remote server
         run: |
-          scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -r ${{ github.workspace }}/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ec2-user/
+          scp -r -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -P ${{ secrets.SSH_PORT }} ${{ github.workspace }}/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ec2-user/
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_USER: ${{ secrets.SSH_USER }}
