@@ -32,7 +32,7 @@ jobs:
       - name: Run commands on remote server
         run: |
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd /home/ec2-user/ && echo 'Running a command on the remote server' > file.txt"
-     
+
 #       - name: Clear known_hosts
 #         run: ssh-keygen -R ${{ secrets.SSH_HOST }}
      
@@ -41,7 +41,8 @@ jobs:
    
       - name: Deploy to remote server
         run: |
-          scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -r ${{ github.workspace }}/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ec2-user/
+          sudo scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -r ${{ github.workspace }}/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ec2-user/
+          user: root
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_USER: ${{ secrets.SSH_USER }}
