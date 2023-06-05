@@ -20,6 +20,11 @@ jobs:
 
       - name: Add SSH host key
         run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+        
+      - name: Testing foo
+        run: |
+          mkdir -p ~/foo
+          touch ~/foo/somefoolfile
 
       - name: Deploy to EC2
         run: |
