@@ -12,6 +12,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        
+      - name: Clear known_hosts
+        run: ssh-keygen -R ${{ secrets.SSH_HOST }}
+
 
 #       - name: Prepare SSH
 #         run: |
