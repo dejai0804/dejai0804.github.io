@@ -11,11 +11,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
-        
-      - name: Clear known_hosts
-        run: ssh-keygen -R ${{ secrets.SSH_HOST }}
-
+        uses: actions/checkout@v2        
 
 #       - name: Prepare SSH
 #         run: |
@@ -36,7 +32,10 @@ jobs:
       - name: Run commands on remote server
         run: |
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd /home/ec2-user/ && echo 'Running a command on the remote server' > file.txt"
-
+     
+      - name: Clear known_hosts
+        run: ssh-keygen -R ${{ secrets.SSH_HOST }}
+     
       - name: Deploy to remote server
         run: |
           sudo rsync -r --delete-after --quiet ${{ github.workspace }}/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/html/
