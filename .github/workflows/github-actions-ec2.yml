@@ -23,7 +23,7 @@ jobs:
 
       - name: Deploy to EC2
         run: |
-          sudo rsync -r --delete-after --quiet ${{ github.workspace }}/ /var/www/html/
+          sudo rsync -r  ${{ github.workspace }}/ /var/www/html/
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_USER: ${{ secrets.SSH_USER }}
