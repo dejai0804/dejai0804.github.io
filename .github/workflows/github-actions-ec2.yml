@@ -41,6 +41,7 @@ jobs:
    
       - name: Deploy to remote server
         run: |
+          sudo chown -R ec2-user:ec2-user ${{ github.workspace }}/ 
           sudo scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -r ${{ github.workspace }}/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ec2-user/
           user: root
         env:
